@@ -1,24 +1,51 @@
-# README
+ <!-- 2441  rails new poki-tinder-backend -d postgresql -T
+ ls
+   cd poki-tinder-backend
+  rails db:create
+bundle add rspec-rails
+rails generate rspec:install
+ git remote add origin https://github.com/learn-academy-2023-charlie/cat-tinder-backend-poki-tinder.git
+ 2448  git branch -M main\n
+ 2449  gst
+ 2450  git checkout -b main
+ 2451  git add .
+ 2452  git commit -m "setting up main"
+ 2453  git push origin main
+ 2454  rails server
+ 2455  git checkout -b backend-structure
+ 2456  rails generate resource Pokemon name:string species:string size:decimal sound:string image:text
+ 2457  rails db:migrate
+ 2458  code .
+ 2459  rspec spec
+ rails db:seed -->
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<!-- first blocker, we forgor to add a 'type' column for our pokemons
+solved by using migrations add_column -->
+<!-- second blocker, 'type' cannot be the name of our column -->
+ <!-- ActiveRecord::SubclassNotFound: The single-table inheritance mechanism failed to locate the subclass: 'fire'. This error is raised because the column 'type' is reserved for storing the class in case of inheritance. Please rename this column if you didn't intend it to be used for storing the inheritance class or overwrite Pokemon.inheritance_column to use another column for that information.
+/Users/learnacademy/Desktop/poki-tinder-backend/db/seeds.rb:37:in `block in <main>'
+/Users/learnacademy/Desktop/poki-tinder-backend/db/seeds.rb:36:in `each'
+/Users/learnacademy/Desktop/poki-tinder-backend/db/seeds.rb:36:in `<main>'
 
-Things you may want to cover:
+Caused by:
+NameError: wrong constant name fire
+/Users/learnacademy/Desktop/poki-tinder-backend/db/seeds.rb:37:in `block in <main>'
+/Users/learnacademy/Desktop/poki-tinder-backend/db/seeds.rb:36:in `each'
+/Users/learnacademy/Desktop/poki-tinder-backend/db/seeds.rb:36:in `<main>'
 
-* Ruby version
+1st attempt to fix : 
+rails rename_column(:pokemons, :type, :pokemon_type)
 
-* System dependencies
+Solution :  did a rails db:rollback , it erases the last modification to the database
 
-* Configuration
+then recreated the column we wanted using the command:
+rails generate migration AddPokemonTypeToPokemons pokemon_type:string
+ 
+ rails db:seed
+ "creating a pokemon {:name=>\"Charmander\", :species=>\"lizard\", :size=>0.6, :sound=>\"char\", :image=>\"https://freepngimg.com/convert-png/117725-charmander-free-hd-image\", :pokemon_type=>\"fire\"}"
+"creating a pokemon {:name=>\"Flareon\", :species=>\"flame\", :size=>0.9, :sound=>\"flarr\", :image=>\"https://e7.pngegg.com/pngimages/519/282/png-clipart-pokemon-flareon-flareon-pokemon-games-pokemon-thumbnail.png\", :pokemon_type=>\"fire\"}"
+"creating a pokemon {:name=>\"Snorlax\", :species=>\"sleeping pokemon\", :size=>2.1, :sound=>\"snore\", :image=>\"https://shorturl.at/bzGTV\", :pokemon_type=>\"normal\"}"
+ 
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+third blocker -> type table is still appearing in our db and as 'nil'
+ -->
