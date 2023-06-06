@@ -1,23 +1,39 @@
- <!-- 2441  rails new poki-tinder-backend -d postgresql -T
- ls
-   cd poki-tinder-backend
-  rails db:create
+ <!-- COMMANDS
+ 
+rails new poki-tinder-backend -d postgresql -T
+ls
+cd poki-tinder-backend
+rails db:create
 bundle add rspec-rails
 rails generate rspec:install
- git remote add origin https://github.com/learn-academy-2023-charlie/cat-tinder-backend-poki-tinder.git
- 2448  git branch -M main\n
- 2449  gst
- 2450  git checkout -b main
- 2451  git add .
- 2452  git commit -m "setting up main"
- 2453  git push origin main
- 2454  rails server
- 2455  git checkout -b backend-structure
- 2456  rails generate resource Pokemon name:string species:string size:decimal sound:string image:text
- 2457  rails db:migrate
- 2458  code .
- 2459  rspec spec
- rails db:seed -->
+git remote add origin https://github.com/learn-academy-2023-charlie/cat-tinder-backend-poki-tinder.git
+git branch -M main\n
+gst
+git checkout -b main
+git add .
+git commit -m "setting up main"
+git push origin main
+rails server
+git checkout -b backend-structure
+rails generate resource Pokemon name:string species:string size:decimal sound:string image:text
+rails db:migrate
+code .
+rspec spec
+rails db:seed 
+rails generate migration AddTypeToPokemons type:string
+rails db:migrate
+rails db:seed
+rails generate migration AddPokemonTypeToPokemons pokemon_type:string
+rails db:migrate
+rails db:seed
+rails db:rollback
+change what you want to change in the migrations file created by the rollback, easy and simple
+rails db:migrate
+rails db:seed
+bundle
+rails db:migrate
+
+-->
 
 <!-- first blocker, we forgor to add a 'type' column for our pokemons
 solved by using migrations add_column -->
