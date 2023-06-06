@@ -8,7 +8,11 @@ class PokemonsController < ApplicationController
     def create
         # create a new poke
         pokemon = Pokemon.create(pokemon_params)
-        render json: pokemon
+        if pokemon.valid?
+            render json: pokemon
+        else 
+            render json: pokemon.errors, status: 422
+        end
     end
 
     def update

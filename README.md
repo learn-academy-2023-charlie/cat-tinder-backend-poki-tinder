@@ -65,3 +65,7 @@ rails generate migration AddPokemonTypeToPokemons pokemon_type:string
 
 third blocker -> type table is still appearing in our db and as 'nil'
  -->
+
+ <!-- cat-tinder-backend-poki-tinder git:(api-validations) ✗ rspec spec/models/pokemon_spec.rb
+F
+
