@@ -6,7 +6,6 @@ class PokemonsController < ApplicationController
     end
 
     def create
-        # create a new poke
         pokemon = Pokemon.create(pokemon_params)
         if pokemon.valid?
             render json: pokemon
@@ -16,14 +15,23 @@ class PokemonsController < ApplicationController
     end
 
     def update
-        if @pokemon.update(pokemon_params)
-          render json: @pokemon
+        pokemon = Pokemon.find(params[:id])
+        pokemon.update(pokemon_params)
+        if pokemon.valid?
+            render json: pokemon
         else
-          render json: @pokemon.errors, status: :unprocessable_entity
+            render json: pokemon.errors, status: 422
         end
-      end
+    end
 
     def destroy
+        pokemon = Pokemon.find(params[:id])
+        if pokemon.valid?
+            pokemon.delete()
+            render json: pokemon
+        else
+            render json: pokemon.errors, status: 422
+        end
     end
 
     private

@@ -170,7 +170,7 @@ RSpec.describe "Pokemons", type: :request do
         expect(response.status).to eq 422
         # Convert the JSON response into a Ruby Hash
         json = JSON.parse(response.body)
-        # Errors are returned as an array because there could be more than one, if there are more than one validation failures on an attribute.
+        # Errors are returned as a one validation failures on an attribute.
         expect(json['pokemon_type']).to include "can't be blank"
         end
     end
