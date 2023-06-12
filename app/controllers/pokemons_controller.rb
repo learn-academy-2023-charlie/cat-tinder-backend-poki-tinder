@@ -16,7 +16,12 @@ class PokemonsController < ApplicationController
     end
 
     def update
-    end
+        if @pokemon.update(pokemon_params)
+          render json: @pokemon
+        else
+          render json: @pokemon.errors, status: :unprocessable_entity
+        end
+      end
 
     def destroy
     end
